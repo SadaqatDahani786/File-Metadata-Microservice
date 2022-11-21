@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>File Metadata Microservice</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        box-sizing: border-box;
+      }
+      html {
+        font-size: 62.5%;
+        font-family: arial, sans-serif;
+
+        /* Colors Properties */
+        --color-primary: #eb5e28;
+
+        --color-secondary: #403d39;
+        --color-secondary-dark: #252422;
+
+        --color-tertiary: #fffcf2;
+        --color-tertiary-dark: #ccc5b9;
+      }
+      body {
+        background-color: var(--color-tertiary);
+      }
+      html,
+      body {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      main {
+        padding: 30px;
+        min-width: 600px;
+        max-width: 1200px;
+        border-radius: 30px;
+        margin: 0 auto;
+        background-color: var(--color-primary);
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+      h1 {
+        font-size: 5rem;
+        color: var(--color-secondary);
+      }
+      h2 {
+        font-size: 2.6rem;
+        color: var(--color-secondary);
+        text-align: center;
+      }
+      p {
+        font-size: 1.8rem;
+        color: var(--color-secondary);
+        font-weight: bold;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        border: 1px solid var(--color-secondary);
+        padding: 40px 20px;
+        background-color: var(--color-tertiary-dark);
+      }
+      label {
+        font-size: 2rem;
+      }
+      hr {
+        background: var(--color-secondary);
+        height: 1px;
+        border: none;
+      }
+      button {
+        padding: 10px 20px;
+        text-transform: uppercase;
+        background-color: var(--color-tertiary);
+        color: var(--color-secondary);
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+      }
+      button:hover {
+        background-color: var(--color-secondary);
+        color: var(--color-tertiary);
+      }
+      .results {
+        display: flex;
+        flex-direction: column;
+        gap: 21px;
+        padding: 40px 20px;
+        display: none;
+      }
+      .group {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.333);
+        padding-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>File Metadata Microservice</h1>
+      <form class="form-upload-file">
+        <label>Please select a file to upload</label>
+        <input required type="file" name="file" />
+        <button type="sumbit">Upload</button>
+      </form>
+      <!-- <hr /> -->
+      <div class="results">
+        <h2>Results</h2>
+        <div class="group">
+          <p>Name</p>
+          <p class="file-name">file.jpg</p>
+        </div>
+        <div class="group">
+          <p>Type</p>
+          <p class="file-type">.jpg</p>
+        </div>
+        <div class="group">
+          <p>Size</p>
+          <p class="file-size">300kb</p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
