@@ -30,17 +30,18 @@
       }
       html,
       body {
-        height: 100%;
+        min-height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
       }
       main {
+        margin: 50px 0;
         padding: 30px;
         min-width: 600px;
         max-width: 1200px;
         border-radius: 30px;
-        margin: 0 auto;
+        margin: 50px auto;
         background-color: var(--color-primary);
         display: flex;
         flex-direction: column;
@@ -110,7 +111,7 @@
       <h1>File Metadata Microservice</h1>
       <form class="form-upload-file">
         <label>Please select a file to upload</label>
-        <input required type="file" name="file" />
+        <input required type="file" name="upfile" />
         <button type="sumbit">Upload</button>
       </form>
       <!-- <hr /> -->
@@ -131,4 +132,50 @@
       </div>
     </main>
   </body>
+  <script>
+    document
+      .querySelector(".form-upload-file")
+      .addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        //1) Reset
+        document.querySelector(".results").style.display = "none";
+
+        //2) Get file
+        const fileToUpload =
+          document.querySelector('input[type="file"]').files[0];
+
+        //3) Create form data
+        const formData = new FormData();
+        formData.append("upfile", fileToUpload);
+
+        //4) Send a request
+        fetch("/api/file-upload", {
+          method: "POST",
+          body: formData,
+        })
+          .then((res) => {
+            if (!res.ok) return Promise.reject(res);
+            return res.json();
+          })
+          .then((resJson) => {
+            e.target.reset();
+            document.querySelector(".results").style.display = "flex";
+            document.querySelector(".file-name").innerHTML = resJson.name;
+            document.querySelector(".file-type").innerHTML = resJson.type;
+            document.querySelector(".file-size").innerHTML =
+              Math.round(resJson.size / 1000) + " KB";
+          })
+          .catch((err) => {
+            err
+              .json()
+              .then((errJson) => alert(errJson.error))
+              .catch((error) =>
+                alert(
+                  "An Error Occurred!\n\nPlease try again, If the error persists, contact site administrator."
+                )
+              );
+          });
+      });
+  </script>
 </html>
